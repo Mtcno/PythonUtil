@@ -7,14 +7,12 @@
 import os
 import urllib.request
 import re
-import execjs
-from html.parser import HTMLParser
 import sys
-from PyChakra.ChakraCore import *
 import json
 import subprocess
-
-
+from html.parser import HTMLParser
+sys.path.append("..")
+from PyChakra.ChakraCore  import *
 
 
 
