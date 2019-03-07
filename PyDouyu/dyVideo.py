@@ -123,15 +123,17 @@ def GetDyJson(url):
 
 	strScript ='(()=>{ %s %s var rid = %d; var tt=parseInt((new Date).getTime()/1e3,10); var did = "10000000000000000000000000001501"; return ub98484234(rid,did,tt); })();'%(want_script,CryptoJS,int(room["room_id"]))
 	
+	# 执行js脚本
 	ctx = Chakra()
 	jsResult = ctx.RunScript(strScript)
 	if jsResult == None:
-		print("Chakra - " + ChakraGetExceptionInfo(ctx))
+		print("Chakra - " + ChakraGetExceptionInfo(ctx)) # 打印异常
 		exit()
-	ctx.Dispose()
+	ctx.Dispose() # 释放ChakraCore Host
 	postsign = jsResult + '&cdn=&rate=-1&ver=Douyu_219012445&iar=1&ive=0'
 	#print(postsign)
 
+	# post request https://www.douyu.com/lapi/live/getH5Play/
 	req = MakeDyReq(int(room["room_id"]),data = postsign.encode("utf-8"))
 	dyJsonStr = ""
 	try:
